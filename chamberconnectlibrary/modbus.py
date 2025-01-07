@@ -200,7 +200,7 @@ class Modbus(object):
             register (int): register(s) to write to
             value (int or list(int)): value(s) to write,
         '''
-        packettype = 16 if isinstance(value, collections.Iterable) else 6
+        packettype = 16 if isinstance(value, collections.abc.Iterable) else 6
         packet = self._make_packet(packettype, register, value)
         try:
             rval = self.interact(packet)
@@ -220,7 +220,7 @@ class Modbus(object):
             register (int): register(s) to write to
             value (int or list(int)): value(s) to write,
         '''
-        if isinstance(value, collections.Iterable):
+        if isinstance(value, collections.abc.Iterable):
             value = [0xFFFF & val for val in value]
         else:
             value = 0xFFFF & value #trim to 16bit signed int
@@ -235,7 +235,7 @@ class Modbus(object):
             register (int): first register to write to, 2 float value will be written.
             value (float or list(float)): vlaue(s) to write to
         '''
-        if isinstance(value, collections.Iterable):
+        if isinstance(value, collections.abc.Iterable):
             packval = []
             for val in value:
                 packval += self._pack32('f', val)
