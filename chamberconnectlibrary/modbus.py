@@ -112,7 +112,7 @@ class Modbus(object):
         val = self.read_input(register, count)
         rstring = ""
         for char in val:
-            if char is not 0:
+            if char != 0:
                 rstring = rstring + chr(char)
         return rstring
 
@@ -187,7 +187,7 @@ class Modbus(object):
         val = self.read_holding(register, count)
         rstring = ""
         for char in val:
-            if char is not 0:
+            if char != 0:
                 rstring = rstring + chr(char)
         return rstring
 
